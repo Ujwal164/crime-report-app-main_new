@@ -1,5 +1,7 @@
 import { Report } from '@prisma/client';
 import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
+import QRCode from 'qrcode';
+import { getBaseUrl } from '@/lib/url';
 
 export async function generateReportPDF(report: Report) {
   // Create a new PDF document
@@ -39,6 +41,41 @@ export async function generateReportPDF(report: Report) {
       font,
       color: rgb(0, 0, 0),
     });
+  });
+
+  // Generate QR code
+  const baseUrl = getBaseUrl();
+  const reportUrl = `${baseUrl}/track-report?reportId=${report.id}`;
+  
+  // Create QR code as PNG
+  const qrCodeDataUrl = await QRCode.toDataURL(reportUrl, {
+    errorCorrectionLevel: 'H',
+    margin: 1,
+    width: 200,
+  });
+
+  // Convert data URL to buffer
+  const qrCodeBuffer = Buffer.from(qrCodeDataUrl.split(',')[1], 'base64');
+  
+  // Embed the QR code image in the PDF
+  const qrCodeImage = await pdfDoc.embedPng(qrCodeBuffer);
+  const qrCodeDims = qrCodeImage.scale(0.5); // Scale down to fit
+  
+  // Draw QR code in the bottom right corner
+  page.drawImage(qrCodeImage, {
+    x: width - qrCodeDims.width - 50,
+    y: 50,
+    width: qrCodeDims.width,
+    height: qrCodeDims.height,
+  });
+
+  // Add QR code label
+  page.drawText('Scan to track report status', {
+    x: width - qrCodeDims.width - 50,
+    y: 30,
+    size: 10,
+    font,
+    color: rgb(0, 0, 0),
   });
 
   // Save the PDF

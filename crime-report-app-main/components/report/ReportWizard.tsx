@@ -19,7 +19,10 @@ export function ReportWizard() {
     <div className="rounded-2xl bg-zinc-900 p-8">
       {currentStep === 1 && <ReportForm onCompleteAction={handleStepComplete} />}
       {currentStep === 2 && reportData && (
-        <ReportSubmitted data={reportData} onComplete={() => router.push(`/track-report?reportId=${reportData.reportId}`)} />
+        <ReportSubmitted 
+          data={reportData} 
+          onCompleteAction={() => router.push(`/track-report?reportId=${reportData.reportId}`)} 
+        />
       )}
     </div>
   );

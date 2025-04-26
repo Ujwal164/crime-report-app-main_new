@@ -6,15 +6,15 @@ import { useState } from "react";
 
 interface ReportSubmittedProps {
   data: any;
-  onComplete: () => void;
+  onCompleteAction: () => void;
 }
 
-export function ReportSubmitted({ data, onComplete }: ReportSubmittedProps) {
+export function ReportSubmitted({ data, onCompleteAction }: ReportSubmittedProps) {
   const router = useRouter();
   const [isDownloading, setIsDownloading] = useState(false);
 
   const handleTrackReport = () => {
-    onComplete();
+    onCompleteAction();
   };
 
   const handleDownloadPDF = async () => {
@@ -80,7 +80,7 @@ export function ReportSubmitted({ data, onComplete }: ReportSubmittedProps) {
           className="mb-4"
         />
         <p className="text-sm text-zinc-400 text-center">
-          Scan this QR code to track your report status on mobile
+          Scan this QR code to get your report ID in your mobile phone
         </p>
       </div>
 

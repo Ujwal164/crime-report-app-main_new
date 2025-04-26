@@ -1,11 +1,17 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Contact() {
+  const handleCall = (number: string) => {
+    window.location.href = `tel:${number}`;
+  };
+
   const emergencyNumbers = [
     {
       title: "Police Emergency",
-      number: "100",
+      number: "115",
       description: "For immediate police assistance in case of crime or emergency",
       icon: "🚓"
     },
@@ -112,7 +118,8 @@ export default function Contact() {
               {emergencyNumbers.map((number, i) => (
                 <div
                   key={i}
-                  className="group relative overflow-hidden rounded-2xl bg-zinc-900 p-8 transition-all hover:bg-zinc-800/80"
+                  className="group relative overflow-hidden rounded-2xl bg-zinc-900 p-8 transition-all hover:bg-zinc-800/80 cursor-pointer"
+                  onClick={() => handleCall(number.number)}
                 >
                   <div className="absolute inset-0 bg-gradient-to-b from-sky-500/10 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                   <div className="relative">
@@ -141,7 +148,8 @@ export default function Contact() {
               {additionalResources.map((resource, i) => (
                 <div
                   key={i}
-                  className="group relative overflow-hidden rounded-2xl bg-zinc-900 p-8 transition-all hover:bg-zinc-800/80"
+                  className="group relative overflow-hidden rounded-2xl bg-zinc-900 p-8 transition-all hover:bg-zinc-800/80 cursor-pointer"
+                  onClick={() => handleCall(resource.number)}
                 >
                   <div className="absolute inset-0 bg-gradient-to-b from-sky-500/10 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                   <div className="relative">
