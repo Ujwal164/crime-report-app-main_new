@@ -1,7 +1,3 @@
-Read file: crime-report-app-main/README.md
-Here is a detailed README for your Anonymous Reporting App, incorporating your current content and expanding with additional sections for clarity, security, API usage, and troubleshooting.
-
----
 
 # Anonymous Reporting App
 
@@ -204,7 +200,3 @@ Contributions are welcome! Please read our [Contributing Guidelines](CONTRIBUTIN
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-Would you like this README saved to your project, or do you want to customize any section further?
